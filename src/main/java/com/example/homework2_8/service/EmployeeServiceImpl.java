@@ -4,7 +4,6 @@ import com.example.homework2_8.data.Employee;
 import com.example.homework2_8.exception.EmployeeAlreadyAddedException;
 import com.example.homework2_8.exception.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 @Service
@@ -17,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String firstName, String lastName) {
+    public Employee add(String firstName, String lastName, int departmentId, int salary) {
         Employee employee = new Employee(firstName, lastName);
         if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException();
@@ -46,7 +45,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Collection<Employee> findAll() {
+    public Collection<Employee> find() {
         return Collections.unmodifiableCollection(employees.values());
+    }
+
+    @Override
+    public Collection<Employee> findAll() {
+        return employees.values();
     }
 }
